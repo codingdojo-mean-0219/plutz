@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Game of Thrones</title>
+
+        <!-- Bootstrap CSS -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.3/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        <style>
+            img{
+                display:inline-block;
+            }
+        </style>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script type="text/javascript">
+            function getInformation(houseNum){
+                $.getJSON("https://anapioficeandfire.com/api/houses/"+houseNum,gotData);
+                }
+            function gotData(data){
+                var myNode = document.getElementById("data");
+                while (myNode.firstChild) {
+                    myNode.removeChild(myNode.firstChild);
+                }
+                console.log(data);
+                var h2=document.createElement("h2");
+                var t = document.createTextNode("Name: "+data.name)
+                h2.appendChild(t);
+                document.getElementById("data").appendChild(h2);
+                var h2=document.createElement("h2");
+                var t = document.createTextNode("Words: "+data.words)
+                h2.appendChild(t);
+                document.getElementById("data").appendChild(h2);
+                var h2=document.createElement("h2");
+                var t = document.createTextNode("Titles: "+data.titles)
+                h2.appendChild(t);
+                document.getElementById("data").appendChild(h2);
+
+            }
+        </script>
+    </head>
+    <body>
+        
+        <div class="container">
+            
+            <img onclick="getInformation(362)" src="assets/stark.jpg" class="img-responsive col-md-3" alt="House Stark">
+            <img onclick="getInformation(378)" src="assets/targaryen.jpg" class="img-responsive col-md-3" alt="House Targaryen">
+            <img onclick="getInformation(229)" src="assets/lannister.jpg" class="img-responsive col-md-3" alt="House Lannister">
+            <img onclick="getInformation(17)" src="assets/baratheon.png" class="img-responsive col-md-3" alt="House Baratheon">
+            
+        </div>
+        
+        <div class="houseDetails" id="data">
+            
+        </div>
+        
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- Bootstrap JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </body>
+</html>

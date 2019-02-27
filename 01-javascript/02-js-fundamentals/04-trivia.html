@@ -1,1 +1,84 @@
 <!-- 2 hours -->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Trivia</title>
+
+        <!-- Bootstrap CSS -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.3/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $.get("https://opentdb.com/api.php?amount=10",triviaData);
+
+            function triviaData(data){
+                var mainContainer = $('#main');
+                console.log(data);
+                for (key in data){
+                    if(key=='results'){
+                        for (var i = 0; i<data['results'].length; i++){
+                            var questionContainer = $('<div class="container" id="question'+i+'">').appendTo(mainContainer);
+                                console.log(i);
+                            createQuestion(data['results'][i],i);
+                        }
+                    }
+                }
+            }   
+            function createQuestion(object,index){
+                    for (key in object){
+                        if (key == 'category'){
+                            var h2=document.createElement("h2");
+                            var t = document.createTextNode(object[key])
+                            h2.appendChild(t);
+                            document.getElementById("question"+index).appendChild(h2);
+                        }
+                        if (key =='question'){
+                            var h3=document.createElement("h3");
+                            var t = document.createTextNode(object[key])
+                            h3.appendChild(t);
+                            document.getElementById("question"+index).appendChild(h3);
+                        }
+                        if (key == 'correct_answer'){
+                            var h4=document.createElement("h4");
+                            var t = document.createTextNode(object[key])
+                            h4.appendChild(t);
+                            document.getElementById("question"+index).appendChild(h4);
+                        }
+                        if (key=='incorrect_answers'){
+                            for (var i = 0; i<object['incorrect_answers'].length;i++){
+                                var h4=document.createElement("h4");
+                                var t = document.createTextNode(object[key][i])
+                                h4.appendChild(t);
+                                document.getElementById("question"+index).appendChild(h4);
+                            }
+                        }
+                    }
+                }   
+            });
+        </script>
+    </head>
+    <body>
+        <h1 class="text-center">Trivia Night!</h1>
+        
+        <div id ="main" class="container">
+
+            
+        </div>
+        
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- Bootstrap JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </body>
+</html>

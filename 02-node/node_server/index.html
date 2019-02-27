@@ -5,7 +5,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>DojoQuery</title>
+        <title>Test Node Server</title>
 
         <!-- Bootstrap CSS -->
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
@@ -16,31 +16,13 @@
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.3/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        
     </head>
     <body>
-        <h1 class="text-center">Hello World</h1>
-        <button id="clickBtn">Click me</button>
-        <button id="hover">Hover over me!</button>
+        <h1 class="text-center">Test for our node server</h1>
+
         <!-- jQuery -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <!-- Bootstrap JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </body>
-    <script type="text/javascript">
-        function $Dojo(id){
-            this.eleId=document.getElementById(id);
-            this.click=function(callback){
-                this.eleId.addEventListener('click',callback);
-            }
-            this.hover=function(hover,moveOut){
-                this.eleId.addEventListener('mouseover',hover);
-                this.eleId.addEventListener('mouseout',moveOut);
-            }
-            return this;
-        }
-        $Dojo("clickBtn").click(() => console.log("Clicked the button"));
-        $Dojo("hover").hover(() => console.log("Hover in"),() => console.log("Hover out"));
-    </script>
 </html>

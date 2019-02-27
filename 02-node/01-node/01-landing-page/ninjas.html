@@ -1,11 +1,11 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>DojoQuery</title>
+        <title>Title Page</title>
 
         <!-- Bootstrap CSS -->
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
@@ -16,31 +16,14 @@
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.3/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        
     </head>
     <body>
-        <h1 class="text-center">Hello World</h1>
-        <button id="clickBtn">Click me</button>
-        <button id="hover">Hover over me!</button>
+        <h1 class="text-center">Ninja Information</h1>
+        <p>A ninja (忍者) or shinobi (忍び) was a covert agent or mercenary in feudal Japan. The functions of a ninja included espionage, sabotage, infiltration, assassination and guerrilla warfare. Their covert methods of waging irregular warfare were deemed dishonorable and beneath the honor of the samurai. Though shinobi proper, as specially trained spies and mercenaries, appeared in the 15th century during the Sengoku period (15th–17th centuries), antecedents may have existed as early as the 12th century.</p>
+
         <!-- jQuery -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <!-- Bootstrap JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </body>
-    <script type="text/javascript">
-        function $Dojo(id){
-            this.eleId=document.getElementById(id);
-            this.click=function(callback){
-                this.eleId.addEventListener('click',callback);
-            }
-            this.hover=function(hover,moveOut){
-                this.eleId.addEventListener('mouseover',hover);
-                this.eleId.addEventListener('mouseout',moveOut);
-            }
-            return this;
-        }
-        $Dojo("clickBtn").click(() => console.log("Clicked the button"));
-        $Dojo("hover").hover(() => console.log("Hover in"),() => console.log("Hover out"));
-    </script>
 </html>
