@@ -1,6 +1,6 @@
-var math = require('./mathlib');
-
-console.log(math.add(2,3));
-console.log(math.multiply(2,3));
-console.log(math.square(5));
-console.log(math.random(1,35));
+var math = require('./mathlib')();
+console.log(math);
+math.add(2,3);
+math.multiply(2,3);
+math.square(5);
+math.random(1,3);
