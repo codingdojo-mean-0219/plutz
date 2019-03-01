@@ -1,0 +1,63 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>SWAPI</title>
+
+        <!-- Bootstrap CSS -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.3/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <h1 class="text-center">Star Wars API</h1>
+        
+        <div class="container">
+            <h1 class="text-center">What would you like to know about?</h1>
+            <div class="text-center">
+                <button type="button" id="peopleBtn" class="btn btn-info">People</button>
+                <button type="button" id="planetBtn" class="btn btn-default">Planets</button>
+            </div>
+            <div class="container text-center" id="resultsContainer">
+            
+            </div>
+        </div>
+        
+
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- Bootstrap JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                $('#peopleBtn').click(function(){
+                    $.get('/people', function(data){
+                    // log the data to be sure we have it before we dive into manipulating the DOM
+                        console.log("got the data", data);
+                        populate(data);
+                        }, 'json');
+                    });
+                });
+                function populate(data){
+                        var obj= data.results;
+                        for (result in obj){
+                        console.log(obj[result].name);
+                        var result=document.getElementById('resultsContainer');
+                        var h5= document.createElement('h5');
+                        var t= document.createTextNode(obj[result].name);
+                        result.appendChild(h5);
+                        h5.appendChild(t);
+                    }
+                    
+                };
+        </script>
+    </body>
+</html>
