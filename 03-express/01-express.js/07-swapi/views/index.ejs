@@ -42,22 +42,85 @@
                     $.get('/people', function(data){
                     // log the data to be sure we have it before we dive into manipulating the DOM
                         console.log("got the data", data);
-                        populate(data);
+                        populate(data,false);
                         }, 'json');
                     });
                 });
-                function populate(data){
+                $(document).ready(function(){
+                    $('#planetBtn').click(function(){
+                        $.get('/planet', function(data){
+                        // log the data to be sure we have it before we dive into manipulating the DOM
+                            console.log("got the data", data);
+                            populate(data,false);
+                            }, 'json');
+                        });
+                    });
+                function populate(data,bool){
+                    if (bool!=true){
+                        var myNode = document.getElementById("resultsContainer");
+                            while (myNode.firstChild) {
+                                myNode.removeChild(myNode.firstChild);
+                            }
+                    }
                         var obj= data.results;
                         for (result in obj){
                         console.log(obj[result].name);
-                        var result=document.getElementById('resultsContainer');
                         var h5= document.createElement('h5');
                         var t= document.createTextNode(obj[result].name);
-                        result.appendChild(h5);
                         h5.appendChild(t);
+                        document.getElementById('resultsContainer').appendChild(h5);
+
                     }
-                    
+                    if (data.previous != null){
+                        var a = document.createElement('button');
+                        var linkText=document.createTextNode("Previous 10");
+                        a.appendChild(linkText);
+                        a.type="button";
+                        document.getElementById('resultsContainer').appendChild(a);
+                        a.onclick= function(){
+                            console.log(data.previous);
+                                $.get('/prev',{context:data.previous}, function(data){
+                                // log the data to be sure we have it before we dive into manipulating the DOM
+                                    console.log("Clicked Previous", data);
+                                    populate(data,false);
+                                    }, 'json');
+                            };
+                    }
+                    var a = document.createElement('button');
+                    var linkText=document.createTextNode("Get all "+data.count);
+                    a.appendChild(linkText);
+                    a.type="button";
+                    document.getElementById('resultsContainer').appendChild(a);
+                    a.onclick= all(data.next,true);
+                   
+                    if (data.next != null){
+                        var a = document.createElement('button');
+                        var linkText=document.createTextNode("Get Next 10 ");
+                        a.appendChild(linkText);
+                        a.type="button";
+                        document.getElementById('resultsContainer').appendChild(a);
+                        a.onclick= function(){
+                            console.log(data.next);
+                            $.get('/next',{context:data.next}, function(data){
+                            // log the data to be sure we have it before we dive into manipulating the DOM
+                                var planet="planet"
+                                console.log("Clicked Next", data);
+                                populate(data,false);
+                                }, 'json');
+                        };
+                }
+                function all(context,bool){
+                    $.get('/all',{context:context}, function(data){
+                    // log the data to be sure we have it before we dive into manipulating the DOM
+                        console.log("Clicked all", data);
+                        if (data.next!=null){
+                            populate(data,bool);
+                            }
+                            all(data.next);
+                            }, 'json');
                 };
+            };
+                    
         </script>
     </body>
 </html>

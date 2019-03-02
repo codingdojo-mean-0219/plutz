@@ -29,7 +29,69 @@ app.get('/people', function(req, res){
         res.json(error);
     })
 });
-
+app.get('/planet', function(req, res){
+        // use the axios .get() method - provide a url and chain the .then() and .catch() methods
+        axios.get('http://swapi.co/api/planets')
+        .then(data => {
+            // log the data before moving on! 
+            console.log(data.data);
+            // rather than rendering, just send back the json data!
+            res.json(data.data);
+        })
+        .catch(error => {
+            // log the error before moving on!
+            console.log(error);
+            res.json(error);
+        })
+    });
+app.get('/next', function(req, res){
+            // use the axios .get() method - provide a url and chain the .then() and .catch() methods
+        console.log(req.query);
+            axios.get(req.query.context)
+            .then(data => {
+                // log the data before moving on! 
+                console.log(data.data);
+                // rather than rendering, just send back the json data!
+                res.json(data.data);
+            })
+            .catch(error => {
+                // log the error before moving on!
+                console.log(error);
+                res.json(error);
+            })
+        });
+    app.get('/prev', function(req, res){
+                // use the axios .get() method - provide a url and chain the .then() and .catch() methods
+            console.log(req.query);
+                axios.get(req.query.context)
+                .then(data => {
+                    // log the data before moving on! 
+                    console.log(data.data);
+                    // rather than rendering, just send back the json data!
+                    res.json(data.data);
+                })
+                .catch(error => {
+                    // log the error before moving on!
+                    console.log(error);
+                    res.json(error);
+                })
+            });
+            app.get('/all', function(req, res){
+                    // use the axios .get() method - provide a url and chain the .then() and .catch() methods
+                console.log(req.query);
+                    axios.get(req.query.context)
+                    .then(data => {
+                        // log the data before moving on! 
+                        console.log(data.data);
+                        // rather than rendering, just send back the json data!
+                        res.json(data.data);
+                    })
+                    .catch(error => {
+                        // log the error before moving on!
+                        console.log(error);
+                        res.json(error);
+                    })
+                });
 app.get('/',function(req,res){
     res.render('index');
 })
