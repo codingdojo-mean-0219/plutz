@@ -92,7 +92,9 @@
                         a.appendChild(linkText);
                         a.type="button";
                         a.id="allbtn";
-                        a.addEventListener("click",all(data.next,true));
+                        a.addEventListener("click",function(){
+                            all(data.next,true);
+                        });
                         document.getElementById('resultsContainer').appendChild(a);
                     
                         if (data.next != null){
@@ -118,9 +120,10 @@
                         console.log("Clicked all", data);
                         if (data.next!=null){
                             populate(data,bool);
+                            all(data.next,bool);
                             }
                         if (data.next==null){
-                            all(data.next,bool);
+                            return console.log("done");
                         }    
                             }, 'json');
                 };
