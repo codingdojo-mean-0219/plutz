@@ -1,0 +1,89 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Survey Form</title>
+
+        <!-- Bootstrap CSS -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.3/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- Bootstrap JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+        <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script> -->
+        <script type ="text/javascript">
+            $(document).ready(function(){
+                var socket = io(); 
+                $('#form').submit(function(event){
+                    event.preventDefault();
+                    socket.emit("posting_form",{
+                        name:$('#name').val(),
+                        location:$('#location').val(),
+                        language:$('#language').val(),
+                        comment:$('#comment').val()
+                    });
+                });
+                socket.on('updated_message',function(data){
+                    $('#server_message').html("This information was sent to the server: "+JSON.stringify(data.data));
+                })
+                socket.on('random_number',function(data){
+                    $('#response_number').html("The lucky number returned by the server is: "+JSON.stringify(data.data));
+                })
+            });        
+        </script>
+    </head>
+    <body>
+        <div id="server_message"></div>
+        <div id="response_number"></div>
+        <div class="container">
+            <h1>Dojo Survey</h1>
+            <form id="form" action="">
+                <div class="form-group row">
+                    <label for='name'>Name: </label>
+                    <input type='text' name='name' id='name' placeholder="Marty McFly">
+                </div>
+                <div class="form-group row">
+                <label for='location'>Location: </label>
+                    <select name='location' id='location'>
+                        <option value='Berkley'>Berkley</option>
+                        <option value='Boise'>Boise</option>
+                        <option value='Chicago'>Chicago</option>
+                        <option value='Dallas'>Dallas</option>
+                        <option value='Los Angeles'>Los Angeles</option>
+                        <option value='Orange County'>Orange County</option>
+                        <option value='Seattle'>Seattle</option>
+                        <option value='Silicon Valley'>Silicon Valley</option>
+                        <option value='Tulsa'>Tulsa</option>
+                        <option value='Tysons Corner'>Tysons Corner</option>
+                    </select>
+                </div>
+                <div class="form-group row">
+                <label for='language'>Favorite Language: </label>
+                    <select name='language' id='language'>
+                        <option value='Python'>Python</option>
+                        <option value='JavaScript'>JavaScript</option>
+                        <option value='Java'>Java</option>
+                        <option value='C#'>C#</option>
+                    </select>
+                </div>
+                <div class="form-group row">
+                    <label for='comment'>Comment(Optional): </label>
+                    <input type="textarea" name='comment' id='comment'>
+                </div>
+                <input type='submit' class=" row btn btn-submit" value='Submit' >
+            </form>
+    </div>
+
+    </body>
+</html>
