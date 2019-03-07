@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>GroupChat</title>
+
+        <!-- Bootstrap CSS -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- Bootstrap JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.3/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        <script>
+            $(document).ready(function(){
+                var socket=io();
+                var name=prompt("Please enter your name");
+                socket.emit("name_entered");
+                socket.on('populate',function(data){
+                    if(typeof data.context !=="undefined"){
+                        console.log(data.context);
+                        for (item in data.context){
+                            $('#conversation').append("\n"+data.context[item].name+" said: ",data.context[item].message);
+                        }
+                    }
+                })
+                
+                $('#send').click(function(){
+                    socket.emit("send_message",{name:name,message:$('#message').val()});
+                });
+
+                socket.on('message_sent',function(data){
+                    let len=data.context.length-1;
+                    $('#conversation').append("\n"+data.context[len].name+" said: ",data.context[len].message);
+                })
+             })
+        </script>
+        <style>
+            #conversation{
+                display:block;
+                height:500px;
+            }
+        </style>
+    </head>
+    <body>
+        
+        <div class="container">
+            <h1 class="text-center">Conversation Board</h1>
+            
+            <textarea name="conversation" id="conversation" class="form-control" rows="3" required="required" readonly></textarea>
+            
+            <input type="text" name="message" id="message" class="form-control" placeholder="enter your message here">
+            
+            <button type="button" id="send" class="btn btn-large btn-block btn-default">Send</button>
+            
+        </div>
+    </body>
+</html>
