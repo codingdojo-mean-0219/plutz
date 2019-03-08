@@ -1,0 +1,44 @@
+use my_first_db
+db.createCollection("students")
+
+db.students.insert({name: "Carl", home_state: "MI", lucky_number: 2, birthday: {month: 4, day: 5, year: 1955}})
+db.students.insert({name: "Bob", home_state: "MI", lucky_number: 6, birthday: {month: 6, day: 4, year: 1975}})
+db.students.insert({name: "Stephanie",home_state: "MI", lucky_number: 4, birthday: {month: 2, day: 3, year: 1985}})
+db.students.insert({name: "Greg", home_state: "MI", lucky_number:7, birthday: {month: 12, day: 5, year: 1925}})
+db.students.insert({name: "Sherly",home_state: "MI", lucky_number: 7, birthday: {month: 1, day: 5, year: 1985}})
+
+db.students.find().pretty()
+db.students.find({$or:[{home_state:"CA"},{home_state:"WA"}]}).pretty()
+
+db.students.find({lucky_number:{$lt:3}})
+db.students.find({lucky_number:{$lte:10}})
+db.students.find({$and: [{lucky_number:{$gte:1}},{lucky_number:{$lte:9}}]}).pretty()
+
+
+db.students.update({},{$set:{"intrests":['coding','brunch','mongoDB']}},false,true)
+
+db.students.update({name:"Carl"},{$push:{intrests:'bowling'}})
+db.students.update({name:"Bob"},{$push:{intrests:'bowling','curling'}})
+db.students.update({name:"Stephanie"},{$push:{intrests:'hockey'}})
+db.students.update({name:"Greg"},{$push:{intrests:'quidditch'}})
+db.students.update({name:"Sherly"},{$push:{intrests:'dancing'}})
+
+db.students.update({name:"Carl"},{$push:{intrests:'taxes'}})
+
+db.students.update({name:"Carl"},{$pull:{intrests:'taxes'}})
+
+db.students.remove({home_state:"CA"})
+
+db.students.remove({name:"Greg"})
+
+db.students.deleteOne({lucky_number:{$gt:5}})
+
+db.students.update({},{$set:{"number_of_belts":0}},false,true)
+
+db.students.update({home_state:"WA"},{$inc:{"number_of_belts":1}},false,true)
+
+db.students.update({},{$rename:{"number_of_belts":'belts_earned'}},false,true)
+
+db.students.update({},{$unset:{lucky_number:1}},false,true)
+
+db.students.update({},{$set:{"updated_on":new Date()}},false,true)
