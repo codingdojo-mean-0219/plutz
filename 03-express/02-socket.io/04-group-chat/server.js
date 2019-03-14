@@ -18,7 +18,7 @@ var bodyParser = require('body-parser');
 
 
 
-var message=[];
+var message=[]; 
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.get('/',function(req,res){

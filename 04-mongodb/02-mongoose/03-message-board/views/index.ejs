@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+<html lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Message Board</title>
+
+        <!-- Bootstrap CSS -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.3/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        
+        <div class="container">
+        <h1 class="text-center">The Message Board</h1>
+        <form action="/message" method="POST" role="form">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Input field">
+            </div>
+            <div class="form-group">
+                <label for="name">Message:</label>
+                <textarea name="message" id="message" class="form-control" rows="3" required="required"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Post Message</button>
+        </form>
+        </div>
+        
+        <div class="container">
+            <% if (messages){%>
+                <%for (let x = 0; x<messages.length; x++){%>
+                    <h3><%= messages[x].name%></h3>
+                    <h5><%=messages[x].message%></h5>
+                    <%=messages%>
+                    <div class="container">
+                    <%for (let i = 0; i<messages[x].comments.length; i++){%>
+                        <h3><%= messages[x].comments[i].name%></h3>
+                        <h5><%=messages[x].comments[i].comment%></h5>
+                    <%}%>
+                    <form action="/comment" method="POST" role="form">
+                        <div class="form-group">
+                            <label for="name">Name:</label>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Input field">
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Comment:</label>
+                            <textarea name="comment" id="comment" class="form-control" rows="3" required="required"></textarea>
+                            
+                            <input type="hidden" name="id" id="inputid" class="form-control" value="<%=messages[x].id%>">
+                            
+                        </div>
+                        <button type="submit" class="btn btn-primary">Post Comment</button>
+                    </form>
+                </div>
+                <%}%>
+            <%}%>
+        </div>
+        
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- Bootstrap JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </body>
+</html>
