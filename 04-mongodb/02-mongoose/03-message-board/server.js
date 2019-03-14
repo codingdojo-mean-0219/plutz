@@ -51,7 +51,7 @@ app.post('/comment',function(req,res){
         if (err){console.log(err);}
         else{
             console.log(req.params.id);
-            Message.findOneAndUpdate({_id:req.params.id},{$push:{comments:result}},function(err,data){
+            Message.findOneAndUpdate({_id:req.body.id},{$push:{comments:result}},function(err,data){
                 if (err){
                     console.log(err)
                 }
