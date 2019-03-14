@@ -20,12 +20,12 @@ var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/message_board');
 
 const CommentSchema = new mongoose.Schema({
-    name:String,
-    comment:String
+    name:{type:String,minlength:2},
+    comment:{type:String,minlength:2}
 });
 const MessageSchema = new mongoose.Schema({
-    name:String,
-    message:String,
+    name:{type:String,minlength:2},
+    message:{type:String,minlength:2},
     comments:[CommentSchema]
 });
 const Message=mongoose.model("Message",MessageSchema);
@@ -50,7 +50,6 @@ app.post('/comment',function(req,res){
     Comment.create(req.body,function(err,result){
         if (err){console.log(err);}
         else{
-            console.log(req.params.id);
             Message.findOneAndUpdate({_id:req.body.id},{$push:{comments:result}},function(err,data){
                 if (err){
                     console.log(err)

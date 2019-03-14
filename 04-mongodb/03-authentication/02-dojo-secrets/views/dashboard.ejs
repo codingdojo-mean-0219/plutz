@@ -1,0 +1,54 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Dashboard</title>
+
+        <!-- Bootstrap CSS -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.3/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <h1 class="text-center">Secrets</h1>
+
+        
+        <div class="container">
+            <h3 class="text-center">Create a Secret</h3>
+            
+            <form action="/secret" method="POST" role="form">
+                <legend>Create a Secret</legend>
+                <div class="form-group">
+                    <label for="secret">Secret:</label>
+                    <input type="text" class="form-control" id="secret" name="secret" placeholder="Input field">
+                    <input type="hidden" name="creator" id="inputid" class="form-control" value="<%=userid%>">
+                    
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+        
+        <div class="container">
+                <% for (let x =0; x<secrets.length; x++) { %>
+                    <a href="/secret/<%=secrets[x]._id%>"><h3><%=secrets[x].secret%></h3></a>
+                    <% if (secrets[x].creator ===userid) {%>
+                        <a href="/delete/<%=secrets[x]._id%>">Delete</a>
+                    <%}%>
+                <%}%>
+
+        </div>
+
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- Bootstrap JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </body>
+</html>

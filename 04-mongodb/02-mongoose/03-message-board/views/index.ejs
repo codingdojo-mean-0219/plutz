@@ -39,7 +39,6 @@
                 <%for (let x = 0; x<messages.length; x++){%>
                     <h3><%= messages[x].name%></h3>
                     <h5><%=messages[x].message%></h5>
-                    <%=messages%>
                     <div class="container">
                     <%for (let i = 0; i<messages[x].comments.length; i++){%>
                         <h3><%= messages[x].comments[i].name%></h3>
