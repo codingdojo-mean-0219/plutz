@@ -14,7 +14,7 @@ app.set('view engine', 'ejs');
 var bodyParser = require('body-parser');
 // use it!
 app.use(bodyParser.urlencoded({extended: true}));
-require('./server/config/mongoose');
+require('./server/config/mongoose')();
 require('./server/config/routes')(app);
 
 var server=app.listen(8000,function(){

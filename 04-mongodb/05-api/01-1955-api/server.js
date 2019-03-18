@@ -5,7 +5,7 @@ const express= require('express'),
     app.use(body_parser.json());
     app.use(body_parser.urlencoded({extended:true}));
 
-    require('./server/config/mongoose');
+    require('./server/config/mongoose')();
     require('./server/config/routes')(app);
 
       var server=app.listen(8000,function(){
