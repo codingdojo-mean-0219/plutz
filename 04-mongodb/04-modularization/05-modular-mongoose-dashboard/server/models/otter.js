@@ -1,8 +1,7 @@
 const mongoose = require('mongoose');
-module.exports=function(){
-    const OtterSchema=new mongoose.Schema({
-        name:String,
-        age:Number
-    });
+const OtterSchema=new mongoose.Schema({
+    name:String,
+    age:Number
+});
+module.exports=
     mongoose.model('Otter',OtterSchema);
-};
