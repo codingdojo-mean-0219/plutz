@@ -19,7 +19,7 @@ create(req,res){
 delete(req,res) {
     Person.remove(request.params)
         .then(person=>res.json(person))
-        .catch(person=>res.json(error));
+        .catch(error=>res.json(error));
 },
 //index
 index(req,res){
