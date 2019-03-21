@@ -4,7 +4,7 @@ const express= require('express'),
 
     app.use(body_parser.json());
     app.use(body_parser.urlencoded({extended:true}));
-
+    app.use(express.static( __dirname + '/public/dist/public' ));
     require('./server/config/mongoose')();
     require('./server/config/routes')(app);
 
