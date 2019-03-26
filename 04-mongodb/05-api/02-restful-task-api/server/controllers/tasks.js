@@ -10,17 +10,16 @@ module.exports={
 
     //show
     show(req,res){
-        Task.findOne(req.params)
-            .then(task=>{
-                res.json(task ? task:"No record of task")
-            .catch(error=>res.json(error))
-            });
+        Task.find({_id:req.params.id})
+            .then(task=>
+                res.json(task ? task:"No record of task"))
+            .catch(error=>res.json(error));
     },
     //delete
     delete(req,res){
         Task.remove(req.params)
             .then(task=>res.json(task))
-            .catch(error=>res.json(error))
+            .catch(error=>res.json(error));
     },
 
     //update
