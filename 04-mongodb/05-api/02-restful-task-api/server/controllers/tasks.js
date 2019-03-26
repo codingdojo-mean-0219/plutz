@@ -17,14 +17,14 @@ module.exports={
     },
     //delete
     delete(req,res){
-        Task.remove(req.params)
+        Task.remove({_id:req.params.id})
             .then(task=>res.json(task))
             .catch(error=>res.json(error));
     },
 
     //update
     update(req,res){
-        Task.findByIdAndUpdate({task:req.body.id},{$set:req.body})
+        Task.findByIdAndUpdate({_id:req.body.id},{$set:req.body})
             .then(task=>res.json(task))
             .catch(error=>res.json(error));
     },
