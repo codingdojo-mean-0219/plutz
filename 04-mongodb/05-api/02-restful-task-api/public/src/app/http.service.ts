@@ -12,7 +12,7 @@ export class HttpService {
     
    }
 
-   updateTasks(taskID){
+   showTasks(taskID){
      return this._http.get('/tasks/'+taskID);
      
    }

@@ -3,8 +3,12 @@
   <h1>
     {{ title }}!
   </h1>
+  <button (click)="getTasksFromService()">Get all the tasks</button>
   <h1>All of the tasks:{{tasks}}</h1>
   <ul>
-    <li *ngFor="let task of tasks">{{task.title}} - {{task.description}}</li>
+    <li *ngFor="let task of tasks">{{task.title}} - {{task.description}}<button (click)="showTask(task._id)">Show</button></li>
   </ul>
-  
+
+  <h3 *ngIf="task !== undefined">Title: {{task[0].title}}</h3>
+  <h2 *ngIf="task !== undefined">Description: {{task[0].description}}</h2>
+  <h2 *ngIf="task !== undefined">Completed= {{task[0].completed}}</h2>

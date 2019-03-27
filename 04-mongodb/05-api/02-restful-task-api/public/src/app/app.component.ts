@@ -9,10 +9,10 @@ import { HttpService } from './http.service';
 export class AppComponent implements OnInit{
   title="Restful Tasks";
   tasks=[];
+  task;
   constructor(private _httpService: HttpService){
   }
   ngOnInit(){
-    this.getTasksFromService();
 
   }
   getTasksFromService(){
@@ -24,5 +24,14 @@ export class AppComponent implements OnInit{
       }
     })
     
+
+    }
+    showTask(id){
+      let observable = this._httpService.showTasks(id);
+      observable.subscribe(data=>{
+        console.log("Got the task",data);
+        this.task=data;
+      })
+    }
+
   }
-}
