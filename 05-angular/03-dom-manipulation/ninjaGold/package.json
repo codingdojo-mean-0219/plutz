@@ -1,0 +1,17 @@
+{
+  "name": "03-dom-manipulation",
+  "version": "1.0.0",
+  "description": "1. Restful Tasks Continued 2. Restful Tasks Interactive 3. Ninja Gold (Group Activity -- Self Assigned) 4. Restful Tasks CRUD 5. Restful Tasks Nested 6. Rate My Cakes",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "mongoose": "^5.4.20"
+  }
+}
