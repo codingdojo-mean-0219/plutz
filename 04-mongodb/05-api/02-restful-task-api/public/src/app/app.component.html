@@ -3,12 +3,27 @@
   <h1>
     {{ title }}!
   </h1>
+  <h1>Create a new Task</h1>
+  <form (submit)="create()">
+    <label  for="title">Title: </label>
+    <input  type="text" name="newTask.title" [(ngModel)]="newTask.title" >
+    <label  for="desctiption">Description: </label>
+    <input  type="text" name="newTask.description" [(ngModel)]="newTask.description">
+    <button type="submit">Create</button>
+  </form>
   <button (click)="getTasksFromService()">Get all the tasks</button>
   <h1>All of the tasks:{{tasks}}</h1>
   <ul>
-    <li *ngFor="let task of tasks">{{task.title}} - {{task.description}}<button (click)="showTask(task._id)">Show</button></li>
+    <li *ngFor="let task of tasks">{{task.title}} - {{task.description}}<button (click)="showTask(task._id)">Show</button>
+      <button (click)="deleteTask(task._id)">Delete</button></li>
   </ul>
-
-  <h3 *ngIf="task !== undefined">Title: {{task[0].title}}</h3>
-  <h2 *ngIf="task !== undefined">Description: {{task[0].description}}</h2>
-  <h2 *ngIf="task !== undefined">Completed= {{task[0].completed}}</h2>
+  <form *ngIf="task !== undefined" (submit)="update(postData._id)">
+    {{task[0]._id | json}}
+    <label  for="title">Title: </label>
+    <input  type="text" name="postData.title" [(ngModel)]="postData.title">
+    <label  for="desctiption">Description: </label>
+    <input  type="text" name="postData.description" [value]="postData.description" >
+    <label  for="completed">Completed: (true or false) </label>
+    <input  type="text" name="postData.completed" [value]="postData.completed">
+    <button type="submit">Update</button>
+ </form>

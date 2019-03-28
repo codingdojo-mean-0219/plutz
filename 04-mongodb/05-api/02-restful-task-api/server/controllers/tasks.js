@@ -24,7 +24,7 @@ module.exports={
 
     //update
     update(req,res){
-        Task.findByIdAndUpdate({_id:req.body.id},{$set:req.body})
+        Task.findByIdAndUpdate({_id:req.params.id},{$set:req.body})
             .then(task=>res.json(task))
             .catch(error=>res.json(error));
     },

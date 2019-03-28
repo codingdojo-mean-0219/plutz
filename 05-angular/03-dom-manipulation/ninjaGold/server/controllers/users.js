@@ -3,7 +3,7 @@ const User= require('mongoose').model('User');
 let farm = () => Math.round(Math.random()*(20-10)+10);
 let cave= () => Math.round(Math.random()*(10-5)+5);
 let house= () => Math.round(Math.random()*(5-2)+2);
-let casino = () => Math.round(Math.random()*(100)-50)
+let casino = () => Math.round(Math.random()*(100)-50);
 module.exports={
     process(req,res){
         User.find({name:req.body.name})
